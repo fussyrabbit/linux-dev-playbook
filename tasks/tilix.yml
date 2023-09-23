@@ -1,0 +1,30 @@
+---
+- name: Make sure the fonts home directory is exists.
+  file:
+    path: "{{ ansible_facts.env.HOME }}/.fonts"
+    state: directory
+    owner: "{{ ansible_facts.env.USER }}"
+    mode: "0751"
+
+- name: Downloads {{ terminal_fonts_family }} fonts.
+  get_url:
+    url: "{{ terminal_fonts_link }}"
+    dest: /tmp/fonts.zip
+
+- name: Unarchive fonts.
+  unarchive:
+    src: "/tmp/fonts.zip"
+    dest: "{{ ansible_facts.env.HOME }}/.fonts"
+    owner: "{{ ansible_facts.env.USER }}"
+    mode: "0755"
+
+- name: Copy tilix config file.
+  template:
+    src: ../templates/tilix.conf
+    dest: "{{ ansible_facts.env.HOME }}/tilix.conf"
+    owner: "{{ ansible_facts.env.USER }}"
+
+- name: Load tilix config with dconf.
+  shell: "dconf load /com/gexperts/Tilix/ < {{ ansible_facts.env.HOME }}/tilix.conf"
+  register: dconf_result
+  changed_when: dconf_result.stdout != ""

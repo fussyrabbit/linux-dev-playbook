@@ -1,0 +1,11 @@
+---
+- name: "Append users {{ ansible_facts.env.USER }} in docker group."
+  user:
+    name: "{{ ansible_facts.env.USER }}"
+    groups: docker
+
+- name: Enable and start the docker service.
+  systemd:
+    name: docker
+    state: started
+    enabled: true

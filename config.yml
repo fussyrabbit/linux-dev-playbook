@@ -1,0 +1,34 @@
+---
+
+configure_pacman: true
+configure_tilix: true
+configure_dotfiles: true
+configure_docker: true
+configure_sudoers: true
+
+pacman_packages:
+  - "telegram-desktop"
+  - "bitwarden"
+  - "tilix"
+  - "obsidian"
+  - "firefox"
+  - "mattermost-desktop"
+  - "vim"
+  - "htop"
+  - "gnu-netcat"
+  - "bind"
+  - "git"
+  - "iperf3"
+  - "docker"
+  - "docker-compose"
+  - "qbittorrent"
+  - "virtualbox"
+  - "stow"
+  - "tree"
+  - "code"
+
+terminal_fonts_family: "ComicShannsMono"
+terminal_fonts_link: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/{{ terminal_fonts_family }}.zip"
+terminal_fonts_size: 15
+
+dotfiles_repo: "https://github.com/fussyrabbit/dotfiles.git"

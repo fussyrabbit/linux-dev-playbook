@@ -1,0 +1,29 @@
+---
+- hosts: all
+
+  vars_files:
+    - config.yml
+
+  tasks:
+    - import_tasks: tasks/pacman.yml
+      become: true
+      when: configure_pacman
+      tags: ["pacman"]    
+
+    - import_tasks: tasks/tilix.yml
+      when: configure_tilix
+      tags: ["tilix"]    
+    
+    - import_tasks: tasks/docker.yml
+      become: true
+      when: configure_docker
+      tags: ["docker"]
+
+    - import_tasks: tasks/dotfiles.yml
+      when: configure_dotfiles
+      tags: ["dotfiles"]
+
+    - import_tasks: tasks/sudoers.yml
+      become: true
+      when: configure_sudoers
+      tags: ["sudoers"]

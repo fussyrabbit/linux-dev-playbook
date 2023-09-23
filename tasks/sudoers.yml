@@ -1,0 +1,8 @@
+---
+
+- name: Create new sudoers file with NOPASSWD.
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    insertafter: '^root ALL='
+    line: '{{ ansible_facts.env.USER }} ALL=(ALL) NOPASSWD: ALL'
+    validate: /usr/sbin/visudo -cf %s
