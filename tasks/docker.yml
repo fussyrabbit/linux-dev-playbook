@@ -1,8 +1,9 @@
 ---
-- name: "Append users {{ ansible_facts.env.USER }} in docker group."
+- name: "Change shell for user {{ ansible_facts.env.USER }}, adding in groups."
   user:
+    shell: /usr/bin/zsh
     name: "{{ ansible_facts.env.USER }}"
-    groups: docker
+    groups: docker,vboxusers
 
 - name: Enable and start the docker service.
   systemd:

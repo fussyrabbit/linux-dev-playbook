@@ -26,6 +26,7 @@ pacman_packages:
   - "stow"
   - "tree"
   - "code"
+  - "zsh"
 
 terminal_fonts_family: "ComicShannsMono"
 terminal_fonts_link: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/{{ terminal_fonts_family }}.zip"
