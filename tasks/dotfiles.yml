@@ -7,6 +7,22 @@
     recursive: no
     force: yes
 
+- name: Check the configs is exists.
+  shell:
+    cmd: ls -la | grep -e '\.\(zshrc\|vimrc\|gitconfig\)'
+    chdir: "{{ ansible_facts.env.HOME }}"
+  register: check_result
+
+- name: Remove existing config files.
+  file:
+    path: "{{ ansible_facts.env.HOME }}/{{ item }}"
+    state: absent
+  loop:
+    - ".zshrc"
+    - ".vimrc"
+    - ".gitconfig"
+  when: check_result.stdout != ""
+
 - name: Stow the dotfiles.
   shell:
     cmd: stow --target={{ ansible_facts.env.HOME }} */
